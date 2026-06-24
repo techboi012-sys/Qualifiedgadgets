@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qualified Gadgets — Dash Popcorn Maker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF7F2;
+      --charcoal: #1A1A1A;
+      --aqua: #4ABFBF;
+      --aqua-dark: #2E9B9B;
+      --warm: #F2E8DA;
+      --mid: #8A8070;
+      --white: #FFFFFF;
+      --footer-link: #b8f1f1;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 5vw;
+      background: rgba(250, 247, 242, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--aqua); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--charcoal);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      border-radius: 100px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--aqua); transform: translateY(-1px); }
+    .nav-cta .material-icons-round { font-size: 1rem; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding-top: 70px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8vw 6vw 8vw 8vw;
+      animation: fadeLeft 0.9s 0.2s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua-dark);
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow .material-icons-round { font-size: 1rem; }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.6rem;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--aqua);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--mid);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--aqua);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 6px 28px rgba(74,191,191,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--aqua-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(74,191,191,0.45);
+    }
+    .btn-primary .material-icons-round { font-size: 1.2rem; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--charcoal);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.9rem 1.4rem;
+      border-radius: 100px;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--aqua); background: rgba(74,191,191,0.06); }
+    .btn-ghost .material-icons-round { font-size: 1rem; }
+
+    .hero-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background: var(--warm);
+      animation: fadeRight 0.9s 0.3s ease both;
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .hero-img-wrap:hover img { transform: scale(1.03); }
+
+    .float-badge {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1rem 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      animation: floatUp 3s ease-in-out infinite;
+    }
+    .float-badge .material-icons-round { font-size: 1.6rem; color: var(--aqua); }
+    .float-badge-text { font-size: 0.8rem; }
+    .float-badge-text strong { display: block; font-weight: 500; font-size: 0.9rem; }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--charcoal);
+      color: var(--white);
+      padding: 2.5rem 8vw;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--aqua);
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section {
+      padding: 8rem 6vw;
+      background: var(--cream);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua-dark);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 1rem;
+      background: var(--warm);
+      aspect-ratio: 4/3;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-item-overlay span {
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* ── FEATURES ── */
+    .features-section {
+      padding: 8rem 8vw;
+      background: var(--warm);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .feature-card {
+      background: var(--white);
+      border-radius: 1.2rem;
+      padding: 2rem 1.8rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.09);
+    }
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(74,191,191,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .feature-icon .material-icons-round { color: var(--aqua); font-size: 1.5rem; }
+    .feature-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .feature-desc { font-size: 0.9rem; color: var(--mid); line-height: 1.7; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      padding: 8rem 8vw;
+      background: var(--cream);
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: center;
+      margin-top: 4rem;
+    }
+    .how-steps { display: flex; flex-direction: column; gap: 2rem; }
+    .how-step {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .how-step.visible { opacity: 1; transform: translateX(0); }
+    .how-step-num {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--aqua);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+    .how-step-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .how-step-body p { font-size: 0.9rem; color: var(--mid); line-height: 1.7; }
+
+    .how-img-wrap {
+      border-radius: 1.5rem;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      position: relative;
+    }
+    .how-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .how-img-wrap:hover img { transform: scale(1.04); }
+    .how-img-accent {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--aqua);
+      color: white;
+      border-radius: 0.8rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .how-img-accent .material-icons-round { font-size: 1rem; }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-section {
+      padding: 8rem 8vw;
+      background: var(--charcoal);
+      color: var(--white);
+      text-align: center;
+    }
+    .testimonial-section .section-title { color: var(--white); margin-bottom: 3rem; }
+    .testimonial-section .section-eyebrow { color: var(--aqua); }
+    .testimonials-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1.2rem;
+      padding: 2rem;
+      text-align: left;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .testimonial-card:hover { border-color: var(--aqua); transform: translateY(-3px); }
+    .stars { color: var(--aqua); letter-spacing: 0.1em; margin-bottom: 1rem; font-size: 0.9rem; }
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+    .testimonial-author {
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-section {
+      padding: 8rem 8vw;
+      background: var(--aqua);
+      text-align: center;
+    }
+    .cta-section .section-title { color: var(--white); margin-bottom: 1rem; }
+    .cta-section p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-cta-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--white);
+      color: var(--aqua-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 1rem 2.2rem;
+      border-radius: 100px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+    }
+    .btn-cta-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+    }
+    .btn-cta-white .material-icons-round { font-size: 1.2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.45);
+      padding: 2.5rem 8vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      font-size: 0.82rem;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      font-weight: 700;
+    }
+    .footer-brand span { color: var(--aqua); }
+    .footer-disclaimer {
+      max-width: 460px;
+      line-height: 1.6;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1.2rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: var(--footer-link);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover {
+      color: var(--white);
+      text-decoration: underline;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { padding: 3rem 6vw 2rem; }
+      .hero-img-wrap { height: 55vw; min-height: 300px; }
+      .how-grid { grid-template-columns: 1fr; }
+      .how-img-wrap { aspect-ratio: 16/9; }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+      .stats-strip { gap: 1.2rem; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; text-align: center; }
+      .float-badge { bottom: 1rem; left: 1rem; right: 1rem; }
+      .footer-links { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-brand" href="#">Qualified<span>Gadgets</span></a>
+  <a class="nav-cta" href="https://www.amazon.com/DAPP150V2AQ04-Popcorn-Measuring-Portion-Popping/dp/B07NWCTXHH?linkCode=ll2&tag=glowhaven12-20&linkId=a24d81d5681c6e3574019f4ff38ace55&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener sponsored nofollow">
+    <span class="material-icons-round">shopping_bag</span>
+    Get Yours on Amazon
+  </a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="eyebrow">
+      <span class="material-icons-round">bolt</span>
+      Editor's Pick — Kitchen Gadgets
+    </span>
+    <h1 class="hero-headline">
+      The Popcorn<br>
+      Maker That<br>
+      <em>Changes Everything</em>
+    </h1>
+    <p class="hero-desc">
+      Dash's air-pop technology delivers perfectly fluffy kernels in minutes — no oil, no mess, just pure snacking joy. A kitchen icon, reimagined in aqua.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://www.amazon.com/DAPP150V2AQ04-Popcorn-Measuring-Portion-Popping/dp/B07NWCTXHH?linkCode=ll2&tag=glowhaven12-20&linkId=a24d81d5681c6e3574019f4ff38ace55&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener sponsored nofollow">
+        <span class="material-icons-round">open_in_new</span>
+        Shop on Amazon
+      </a>
+      <a class="btn-ghost" href="#features">
+        <span class="material-icons-round">expand_more</span>
+        Learn More
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-img-wrap">
+    <img src="corn1.jpg" alt="Popcorn being made" loading="eager" />
+    <div class="float-badge">
+      <span class="material-icons-round">verified</span>
+      <div class="float-badge-text">
+        <strong>Top Rated</strong>
+        Thousands of happy customers
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-strip reveal">
+  <div class="stat">
+    <div class="stat-num">16</div>
+    <div class="stat-label">Cups Per Batch</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3 min</div>
+    <div class="stat-label">Pop Time</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Oil Required</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4.6</div>
+    <div class="stat-label">Average Rating</div>
+  </div>
+</div>
+
+<!-- ── GALLERY ── -->
+<section class="gallery-section">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Gallery</p>
+    <h2 class="section-title">Snack Season,<br>Every Season</h2>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="corn2.jpg" alt="Popcorn close up" loading="lazy" />
+      <div class="gallery-item-overlay"><span>Movie night ready</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="corn3.jpg" alt="Popcorn in a bowl" loading="lazy" />
+      <div class="gallery-item-overlay"><span>Fresh and fluffy</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="corn4.jpg" alt="Popcorn snack time" loading="lazy" />
+      <div class="gallery-item-overlay"><span>Guilt-free snacking</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="corn2.jpg" alt="Cinema popcorn" loading="lazy" />
+      <div class="gallery-item-overlay"><span>Cinema at home</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="features-section" id="features">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Why You'll Love It</p>
+    <h2 class="section-title">Built for Real Life</h2>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><span class="material-icons-round">air</span></div>
+      <h3 class="feature-title">Hot Air Technology</h3>
+      <p class="feature-desc">Pops kernels using superheated air — zero oil needed. You get all the crunch without the grease and extra calories.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><span class="material-icons-round">timer</span></div>
+      <h3 class="feature-title">Ready in Minutes</h3>
+      <p class="feature-desc">From countertop to couch in under 3 minutes. The fastest route from craving to snacking you've ever experienced.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><span class="material-icons-round">kitchen</span></div>
+      <h3 class="feature-title">Effortless Cleanup</h3>
+      <p class="feature-desc">The removable parts wipe clean in seconds. No baked-on oil, no stubborn residue — just rinse and you're done.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><span class="material-icons-round">straighten</span></div>
+      <h3 class="feature-title">Measuring Cup Lid</h3>
+      <p class="feature-desc">The built-in lid doubles as a precise measuring cup so you never overfill the chamber or waste a single kernel.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><span class="material-icons-round">palette</span></div>
+      <h3 class="feature-title">Statement Design</h3>
+      <p class="feature-desc">The vivid aqua finish looks as good on your countertop as it tastes on your palate. Compact, stylish, bold.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><span class="material-icons-round">groups</span></div>
+      <h3 class="feature-title">Family-Sized Batches</h3>
+      <p class="feature-desc">Pops up to 16 cups per cycle — enough to fill a big bowl for the whole family without multiple rounds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Simple as 1-2-3</p>
+    <h2 class="section-title">From Kernels to<br>Couch in No Time</h2>
+  </div>
+
+  <div class="how-grid">
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-body">
+          <h4>Measure Your Kernels</h4>
+          <p>Use the lid as a measuring cup — it holds the perfect portion every time. No guessing, no overflow.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-body">
+          <h4>Plug In and Press</h4>
+          <p>Pour kernels into the chamber, set your bowl at the chute, and flip the switch. That's it — the machine takes over.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-body">
+          <h4>Season and Enjoy</h4>
+          <p>Add butter, salt, cinnamon sugar — whatever you're in the mood for. Fresh, hot popcorn in under 3 minutes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="how-img-wrap reveal">
+      <img src="corn1.jpg" alt="Popcorn in kitchen" loading="lazy" />
+      <div class="how-img-accent">
+        <span class="material-icons-round">bolt</span>
+        No oil needed
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonial-section">
+  <div class="section-header">
+    <p class="section-eyebrow">Customer Reviews</p>
+    <h2 class="section-title">People Are Obsessed</h2>
+  </div>
+
+  <div class="testimonials-wrap">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"We use this every single movie night. The popcorn comes out perfectly fluffy, and the cleanup takes maybe 30 seconds. Absolute game changer."</p>
+      <div class="testimonial-author">— Sarah M., verified buyer</div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"My kids ask for popcorn every afternoon now. It's fast, it's healthy, and the aqua color looks adorable on my counter. Highly recommend."</p>
+      <div class="testimonial-author">— James T., verified buyer</div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★☆</div>
+      <p class="testimonial-text">"Super quick and easy to use. The measuring lid is clever — I always know exactly how much to put in. Way better than microwave bags."</p>
+      <div class="testimonial-author">— Priya K., verified buyer</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2 class="section-title reveal">Ready for the Best<br>Popcorn of Your Life?</h2>
+  <p class="reveal">Join thousands of snack lovers who've ditched the microwave bags for good. One click, one machine, infinite movie nights.</p>
+  <a class="btn-cta-white reveal" href="https://www.amazon.com/DAPP150V2AQ04-Popcorn-Measuring-Portion-Popping/dp/B07NWCTXHH?linkCode=ll2&tag=glowhaven12-20&linkId=a24d81d5681c6e3574019f4ff38ace55&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener sponsored nofollow">
+    <span class="material-icons-round">shopping_cart</span>
+    Order Now on Amazon
+  </a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <div class="footer-brand">Qualified<span>Gadgets</span></div>
+    <div style="margin-top:0.4rem">Curated kitchen tech you'll actually use.</div>
+  </div>
+
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <p class="footer-disclaimer">
+    As an Amazon Associate, Qualified Gadgets earns from qualifying purchases. Product availability and details may vary. All product images belong to their respective owners.
+  </p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const cards = entry.target.querySelectorAll('.feature-card, .how-step, .testimonial-card');
+        cards.forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), i * 120);
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .features-section, .how-section, .testimonial-section').forEach(el => observer.observe(el));
+  document.querySelectorAll('.feature-card, .how-step, .testimonial-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
