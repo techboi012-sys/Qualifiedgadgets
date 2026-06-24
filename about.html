@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Qualified Gadgets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root{
+      --cream:#FAF7F2;
+      --charcoal:#1A1A1A;
+      --aqua:#4ABFBF;
+      --aqua-dark:#2E9B9B;
+      --warm:#F2E8DA;
+      --mid:#8A8070;
+      --white:#FFFFFF;
+    }
+
+    body{
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family:'DM Sans',sans-serif;
+      line-height:1.7;
+    }
+
+    nav{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1.2rem 6vw;
+      background:rgba(250,247,242,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+
+    .brand{
+      font-family:'Playfair Display',serif;
+      font-size:1.2rem;
+      font-weight:700;
+      text-decoration:none;
+      color:var(--charcoal);
+    }
+
+    .brand span{ color:var(--aqua); }
+
+    .nav-links{
+      display:flex;
+      gap:1.2rem;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--charcoal);
+      font-weight:500;
+      font-size:0.95rem;
+    }
+
+    .nav-links a:hover{ color:var(--aqua-dark); }
+
+    .hero{
+      padding:5rem 8vw 3rem;
+      text-align:center;
+      background:linear-gradient(to bottom, var(--warm), var(--cream));
+    }
+
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      color:var(--aqua-dark);
+      font-size:0.75rem;
+      font-weight:700;
+      margin-bottom:1rem;
+    }
+
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.2rem,5vw,4rem);
+      line-height:1.1;
+      margin-bottom:1rem;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:0 auto;
+      color:var(--mid);
+      font-size:1.05rem;
+    }
+
+    .container{
+      width:min(1100px, 92%);
+      margin:0 auto;
+      padding:4rem 0 5rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:2rem;
+      align-items:start;
+      margin-bottom:2rem;
+    }
+
+    .card{
+      background:var(--white);
+      border-radius:1.2rem;
+      padding:2rem;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    .card h2{
+      font-family:'Playfair Display',serif;
+      font-size:1.6rem;
+      margin-bottom:1rem;
+    }
+
+    .card p{
+      color:#4a443c;
+      margin-bottom:1rem;
+    }
+
+    .highlight-box{
+      background:var(--warm);
+      border-left:4px solid var(--aqua);
+    }
+
+    .values{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1.2rem;
+      margin-top:2rem;
+    }
+
+    .value{
+      background:var(--white);
+      border-radius:1rem;
+      padding:1.4rem;
+      box-shadow:0 8px 24px rgba(0,0,0,0.05);
+    }
+
+    .value h3{
+      font-family:'Playfair Display',serif;
+      margin-bottom:0.6rem;
+      font-size:1.1rem;
+    }
+
+    .value p{
+      color:var(--mid);
+      font-size:0.95rem;
+    }
+
+    .cta{
+      margin-top:3rem;
+      text-align:center;
+      background:var(--aqua);
+      color:white;
+      padding:3rem 1.5rem;
+      border-radius:1.4rem;
+    }
+
+    .cta h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,4vw,2.8rem);
+      margin-bottom:0.8rem;
+    }
+
+    .cta p{
+      max-width:680px;
+      margin:0 auto 1.5rem;
+      color:rgba(255,255,255,0.9);
+    }
+
+    .btn{
+      display:inline-block;
+      background:white;
+      color:var(--aqua-dark);
+      text-decoration:none;
+      padding:0.95rem 1.6rem;
+      border-radius:999px;
+      font-weight:700;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    footer{
+      background:var(--charcoal);
+      color:rgba(255,255,255,0.7);
+      padding:2rem 6vw;
+      text-align:center;
+    }
+
+    footer a{
+      color:#b8f1f1;
+      text-decoration:none;
+      margin:0 0.6rem;
+    }
+
+    footer a:hover{ color:#fff; }
+
+    @media (max-width: 850px){
+      .grid{ grid-template-columns:1fr; }
+      nav{ flex-direction:column; gap:0.8rem; }
+      .nav-links{ justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="brand">Qualified<span>Gadgets</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">About Qualified Gadgets</div>
+    <h1>We Find Gadgets Worth<br>Actually Buying</h1>
+    <p>
+      Qualified Gadgets is a product recommendation website focused on discovering practical, stylish and useful gadgets for everyday life. We highlight products we believe are interesting, functional and worth checking out.
+    </p>
+  </section>
+
+  <main class="container">
+    <div class="grid">
+      <section class="card">
+        <h2>Who We Are</h2>
+        <p>
+          Qualified Gadgets was created to showcase curated gadgets and helpful product discoveries in a clean and easy-to-browse format. Instead of making you dig through endless listings, we aim to present standout items in a simple way.
+        </p>
+        <p>
+          Our content may include product roundups, featured gadget pages, kitchen tools, smart accessories and other useful finds from trusted online marketplaces.
+        </p>
+        <p>
+          We focus on making the browsing experience visually appealing, straightforward and mobile-friendly while helping visitors discover products they may genuinely enjoy.
+        </p>
+      </section>
+
+      <aside class="card highlight-box">
+        <h2>What We Do</h2>
+        <p>• Curate interesting gadget and product recommendations</p>
+        <p>• Create simple landing pages for featured products</p>
+        <p>• Share useful product highlights and benefits</p>
+        <p>• Help visitors discover products through easy navigation</p>
+      </aside>
+    </div>
+
+    <section class="card">
+      <h2>Our Approach</h2>
+      <p>
+        We aim to keep our pages simple, readable and focused on the product itself. Some links on this website may be affiliate links, which means we may earn a commission if you make a purchase through them at no extra cost to you.
+      </p>
+      <p>
+        This helps support the website and allows us to continue creating product pages, testing layouts and publishing more gadget recommendations over time.
+      </p>
+
+      <div class="values">
+        <div class="value">
+          <h3>Curated Picks</h3>
+          <p>We focus on products that are interesting, practical, and worth highlighting.</p>
+        </div>
+        <div class="value">
+          <h3>Simple Experience</h3>
+          <p>Our pages are designed to be clean, lightweight and easy to browse on mobile and desktop.</p>
+        </div>
+        <div class="value">
+          <h3>Transparent Monetization</h3>
+          <p>Some links may earn us a commission, and we clearly disclose that where appropriate.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Explore Our Featured Gadget Picks</h2>
+      <p>
+        Browse our product pages and discover gadgets that combine convenience, design and everyday usefulness.
+      </p>
+      <a class="btn" href="index.html">Back to Homepage</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Qualified Gadgets. All rights reserved.</p>
+    <p style="margin-top:0.6rem;">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </p>
+  </footer>
+
+</body>
+</html>
