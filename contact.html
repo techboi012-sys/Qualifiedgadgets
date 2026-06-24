@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Qualified Gadgets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root{
+      --cream:#FAF7F2;
+      --charcoal:#1A1A1A;
+      --aqua:#4ABFBF;
+      --aqua-dark:#2E9B9B;
+      --warm:#F2E8DA;
+      --mid:#8A8070;
+      --white:#FFFFFF;
+    }
+
+    body{
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family:'DM Sans',sans-serif;
+      line-height:1.7;
+    }
+
+    nav{
+      position: sticky;
+      top:0;
+      z-index:100;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1.2rem 6vw;
+      background:rgba(250,247,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+
+    .brand{
+      font-family:'Playfair Display',serif;
+      font-size:1.2rem;
+      font-weight:700;
+      text-decoration:none;
+      color:var(--charcoal);
+    }
+    .brand span{ color:var(--aqua); }
+
+    .nav-links{
+      display:flex;
+      gap:1.2rem;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--charcoal);
+      font-weight:500;
+      font-size:0.95rem;
+    }
+
+    .nav-links a:hover{ color:var(--aqua-dark); }
+
+    .hero{
+      padding:4.5rem 8vw 2.5rem;
+      text-align:center;
+      background:linear-gradient(to bottom, var(--warm), var(--cream));
+    }
+
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      color:var(--aqua-dark);
+      font-size:0.75rem;
+      font-weight:700;
+      margin-bottom:1rem;
+    }
+
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,4.5vw,3.6rem);
+      line-height:1.1;
+      margin-bottom:1rem;
+    }
+
+    .hero p{
+      max-width:720px;
+      margin:0 auto;
+      color:var(--mid);
+      font-size:1rem;
+    }
+
+    .container{
+      width:min(980px, 92%);
+      margin:0 auto;
+      padding:3rem 0 5rem;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:2rem;
+    }
+
+    .card{
+      background:var(--white);
+      border-radius:1.2rem;
+      padding:2rem;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    .card h2{
+      font-family:'Playfair Display',serif;
+      font-size:1.5rem;
+      margin-bottom:1rem;
+    }
+
+    .card p{
+      color:#4a443c;
+      margin-bottom:1rem;
+    }
+
+    .email-box{
+      background:var(--warm);
+      border-left:4px solid var(--aqua);
+      border-radius:1rem;
+      padding:1rem;
+      margin-top:1rem;
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    .contact-list{
+      margin-top:1rem;
+    }
+
+    .contact-list p{
+      margin-bottom:0.7rem;
+    }
+
+    .note{
+      margin-top:2rem;
+      background:var(--warm);
+      border-left:4px solid var(--aqua);
+    }
+
+    footer{
+      background:var(--charcoal);
+      color:rgba(255,255,255,0.7);
+      padding:2rem 6vw;
+      text-align:center;
+    }
+
+    footer a{
+      color:#b8f1f1;
+      text-decoration:none;
+      margin:0 0.6rem;
+    }
+
+    footer a:hover{ color:#fff; }
+
+    @media (max-width: 850px){
+      nav{ flex-direction:column; gap:0.8rem; }
+      .nav-links{ justify-content:center; }
+      .contact-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="brand">Qualified<span>Gadgets</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Contact Us</div>
+    <h1>Get In Touch With Qualified Gadgets</h1>
+    <p>
+      If you have questions, feedback, partnership inquiries or website-related concerns, you can reach out using the contact information below.
+    </p>
+  </section>
+
+  <main class="container">
+    <div class="contact-grid">
+      <section class="card">
+        <h2>Contact Information</h2>
+        <p>
+          We’re happy to hear from visitors, readers, brands and partners. For general inquiries related to this website, please contact us by email.
+        </p>
+
+        <div class="email-box">
+          Email: techboi012@gmail.com
+        </div>
+
+        <div class="contact-list">
+          <p><strong>Website:</strong> Qualified Gadgets</p>
+          <p><strong>Response Time:</strong> We aim to respond as soon as possible.</p>
+          <p><strong>Topics:</strong> Product pages, general inquiries, partnerships, feedback, privacy-related questions.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Before You Reach Out</h2>
+        <p>
+          To help us understand your message faster, please include a short subject line and explain the reason for your contact clearly.
+        </p>
+        <p>You can contact us regarding:</p>
+        <p>• General website inquiries</p>
+        <p>• Product page questions</p>
+        <p>• Affiliate or disclosure concerns</p>
+        <p>• Privacy-related requests</p>
+        <p>• Business or collaboration inquiries</p>
+      </section>
+    </div>
+
+
+  </main>
+
+  <footer>
+    <p>© 2026 Qualified Gadgets. All rights reserved.</p>
+    <p style="margin-top:0.6rem;">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </p>
+  </footer>
+
+</body>
+</html>
